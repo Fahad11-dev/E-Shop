@@ -17,13 +17,13 @@ class CartController extends Controller
         $user_id = Auth::user()->id;
         $cart = Cart::where('user_id',$user_id)->select("id")
         ->leftjoin('products','carts.product_id','=','products.id')->select('*','carts.id as c_id')->get();
-        
+
         return view('frontend.cart',compact('cart'));
     }
 
 
     public function Cartadd(Request $request)
-    { 
+    {
         $id = $request->id;
         if(Auth::check())
         {
