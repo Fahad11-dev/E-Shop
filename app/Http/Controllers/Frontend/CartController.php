@@ -14,11 +14,13 @@ class CartController extends Controller
 {
     public function returnCart()
     {
+        
         $user_id = Auth::user()->id;
+        $total = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->sum('total_price');
         $cart = Cart::where('user_id',$user_id)->select("id")
         ->leftjoin('products','carts.product_id','=','products.id')->select('*','carts.id as c_id')->get();
 
-        return view('frontend.cart',compact('cart'));
+        return view('frontend.cart',compact('cart','total'));
     }
 
 
@@ -35,6 +37,7 @@ class CartController extends Controller
                 'product_price'=>$product->product_price,
                 'product_quantity'=>1,
                 'total_price'=>$product->product_price,
+                'status'=>'incomplete',
             ]);
             // $category = Category::all();
             // return view('frontend.cart',compact('category'));

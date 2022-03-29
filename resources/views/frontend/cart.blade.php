@@ -35,7 +35,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($cart as $item)                            
+                        @foreach ($cart as $item)
                     <tr>
                         <input type="hidden" id="cart_id" name="id" value="{{ $item->c_id }}">
                         <td class="image" data-title="No"><img src="{{('admin_assets/uploads/product/'.$item->product_image)}}" alt="#"></td>
@@ -43,24 +43,24 @@
                             <p class="product-name"><a href="#">{{ $item->product_title }}</a></p>
                             <p class="product-des">Maboriosam in a tonto nesciung eget  distingy magndapibus.</p>
                         </td>
-                        <td class="price" data="{{ $item->product_price}}"><span>${{ $item->product_price}}.00 </span></td>
-                        <td class="qty" data-title="Qty"><!-- Input Order -->
+                        <td class="price{{ $item->c_id}}" data="{{ $item->product_price}}"><span>${{ $item->product_price}}.00 </span></td>
+                        <td class="qty" data-title="Qty">
                             <div class="input-group">
                                 <div class="button minus">
-                                    <button type="button" class="btn btn-primary btn-number" id="min" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                    <button type="button" class="btn btn-primary setvalue decrement-btn" data="{{$item->c_id}}" id="min"  data-type="minus" data-field="quant[1]">
                                         <i class="ti-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="100" value="{{ $item->product_quantity}}">
+                                <input type="text" name="quant[1]" class="input-number qty{{$item->c_id}}"  data-min="1" data-max="100" value="{{ $item->product_quantity}}">
                                 <div class="button plus">
-                                    <button type="button" class="btn btn-primary btn-number" id="max" data-type="plus" data-field="quant[1]">
+                                    <button type="button" class="btn btn-primary setvalue increment-btn" data="{{$item->c_id}}" id="max" data-type="plus" data-field="quant[1]">
                                         <i class="ti-plus"></i>
                                     </button>
                                 </div>
                             </div>
                             <!--/ End Input Order -->
                         </td>
-                        <td class="total-amount" data-title="Total"><span id="total" data-total="{{ $item->total_price }}">${{ $item->total_price }}.00</span></td>
+                        <td class="total-amount" data-title="Total"><span class="total{{$item->c_id}}" data-total="{{ $item->total_price }}">${{ $item->total_price }}.00</span></td>
                         <td class="action" data-title="Remove"><a href="#"><i class="ti-trash remove-icon"></i></a></td>
                     </tr>
                     @endforeach
@@ -90,14 +90,12 @@
                         <div class="col-lg-4 col-md-7 col-12">
                             <div class="right">
                                 <ul>
-                                    <li>Cart Subtotal<span>$330.00</span></li>
-                                    <li>Shipping<span>Free</span></li>
-                                    <li>You Save<span>$20.00</span></li>
-                                    <li class="last">You Pay<span>$310.00</span></li>
+                                    <li>Cart Subtotal<span>${{$total}}.00</span></li>
+                                    <li class="last">You Pay<span>${{$total}}.00</span></li>
                                 </ul>
                                 <div class="button5">
-                                    <a href="#" class="btn">Checkout</a>
-                                    <a href="#" class="btn">Continue shopping</a>
+                                    <a href="#" class="btn checkout_btn">Buy Now</a>
+                                    <a href="{{ url('/') }}" class="btn">Continue shopping</a>
                                 </div>
                             </div>
                         </div>
@@ -261,7 +259,7 @@
                                             <i class="ti-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="1000" value="1">
+                                    <input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="10" value="1">
                                     <div class="button plus">
                                         <button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
                                             <i class="ti-plus"></i>

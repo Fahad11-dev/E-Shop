@@ -49,12 +49,12 @@
                         <div class="tab-pane fade show active" id="man" role="tabpanel">
                             <div class="tab-single">
                                 <div class="row">
-                                    
+
                                     @foreach ($product as $product)
                                     <div class="col-xl-3 col-lg-4 col-md-4 col-12">
                                         <div class="single-product">
                                             <div class="product-img">
-                                                <a id="cart" data="{{ $product->id }}">
+                                                <a class="cart" data="{{ $product->id }}">
                                                     <img class="default-img" src="{{ asset ('admin_assets/uploads/product/'. $product->product_image)}}" alt="#">
                                                     <img class="hover-img" src="{{ asset ('admin_assets/uploads/product/'. $product->product_image)}}" alt="#">
                                                 </a>
@@ -64,7 +64,7 @@
                                                         <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                                                     </div>
                                                     <div class="product-action-2">
-                                                        <a title="Add to cart" id="cart" data="{{ $product->id }}">Add to cart</a>
+                                                        <a title="Add to cart" class="cart" data="{{ $product->id }}">Add to cart</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                    
+
                                 </div>
                             </div>
                         </div>

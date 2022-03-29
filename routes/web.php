@@ -41,6 +41,7 @@ Route::group(['middleware'=>'userauth'],function(){
     Route::POST('AddCart',[CartController::class,'Cartadd']);
     Route::POST('updateCart',[CartController::class,'cartUpdate']);
     Route::get('/checkout',[CheckoutController::class,'returnCheckout']);
+    Route::POST('/getOrder',[CheckoutController::class,'CheckOut']);
 });
 
 

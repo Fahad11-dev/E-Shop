@@ -129,14 +129,14 @@
                 <div class="col-lg-8 col-md-7 col-12">
                     <div class="search-bar-top">
                         <div class="search-bar">
-                            
+
                             <select>
                                 {{-- @foreach ($category as $category)
                                 <option selected="selected">All Category</option>
                                 <option>{{ $category->name }}</option>
                                 @endforeach --}}
                             </select>
-                            
+
                             <form>
                                 <input name="search" placeholder="Search Products Here....." type="search">
                                 <button class="btnn"><i class="ti-search"></i></button>
@@ -154,7 +154,8 @@
                             <a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar shopping">
-                            <a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{ $cart }}</span></a>
+                            <a href="#" class="single-icon"><i class="ti-bag"></i>
+                                <span class="total-count"><?=isset($cart) ? : 0?></span></a>
                             <!-- Shopping Item -->
                             <div class="shopping-item">
                                 <div class="dropdown-cart-header">

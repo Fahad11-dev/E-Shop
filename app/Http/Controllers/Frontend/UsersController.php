@@ -65,18 +65,18 @@ class UsersController extends Controller
         #Check Email IF EXIST
         $checkEmail = User::where(['email'=>$data['email']])->exists();
         if(!$checkEmail){
-            return redirect('/login')->with('error','Your Email does not exist');
+            return redirect('/login')->with('message','Your Email does not exist');
         }
 
         $credentials = request(['email','password']);
         if (Auth::attempt($credentials)) {
             if(Auth::user()->status == 'inactive'){
-                return redirect('/login')->with('error','Your Account is not Active');
+                return redirect('/login')->with('message','Your Account is not Active');
             }
             $updateStatus = User::where('id',Auth::user()->id)->update(['is_user_active'=>'online']);
             return redirect()->intended('/');
         }else{
-            return redirect('/login')->with('error','Password is Incorrect');
+            return redirect('/login')->with('message','Password is Incorrect');
         }
     }
 
@@ -86,7 +86,7 @@ class UsersController extends Controller
     public function DoLogout()
     {
         $updateStatus = User::where('id',Auth::user()->id)->update(['is_user_active'=>'offline']);
-        Auth()->logout(); 
+        Auth()->logout();
         return redirect('/login')->with('message','You have been logged out');
     }
 }
