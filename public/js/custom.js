@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 
     //Quantity Buttons
-    
+
     $('.increment-btn').click(function(e) {
         e.preventDefault();
         var id  = $(this).attr('data');
@@ -41,7 +41,7 @@ $(document).ready(function(){
             $('.qty'+id).val(value)
         }
     });
-   
+
     $('.decrement-btn').click(function(e) {
         e.preventDefault();
         var id  = $(this).attr('data');
@@ -53,10 +53,10 @@ $(document).ready(function(){
             $('.qty'+id).val(value)
         }
     });
-    
-  
 
-        
+
+
+
     $(".setvalue").click(function(){
         var id  = $(this).attr('data');
         var quantity = $('.qty'+id).val();
@@ -80,27 +80,4 @@ $(document).ready(function(){
                     });
     });
 
-
-    $(".checkout_btn").click(function(){
-        var cart_id = $("#cart_id").val();
-        for(let i = 0; i < cart_id.length ; i++){  
-            console.log(cart_id);
-        var status = 'pending';
-        $.ajax({
-            url : "/getOrder",
-            method : "POST",
-            data : {
-                cart_id : cart_id ,
-                status : status
-            },
-            headers:{
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success:  function (response) {
-                window.location.replace('/checkout');
-                console.log(response.result);
-                },
-            });
-        }
-    }); 
 });

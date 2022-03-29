@@ -370,9 +370,8 @@
                         <h2>CART  TOTALS</h2>
                         <div class="content">
                             <ul>
-                                <li>Sub Total<span>$330.00</span></li>
-                                <li>(+) Shipping<span>$10.00</span></li>
-                                <li class="last">Total<span>$340.00</span></li>
+                                <li>Sub Total<span>${{ $total }}.00</span></li>
+                                <li class="last">Total<span>${{ $total }}.00</span></li>
                             </ul>
                         </div>
                     </div>

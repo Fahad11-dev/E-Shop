@@ -131,10 +131,10 @@
                         <div class="search-bar">
 
                             <select>
-                                {{-- @foreach ($category as $category)
+                                @foreach ($category as $item)
                                 <option selected="selected">All Category</option>
-                                <option>{{ $category->name }}</option>
-                                @endforeach --}}
+                                <option>{{ $item->name }}</option>
+                                @endforeach
                             </select>
 
                             <form>
@@ -155,7 +155,7 @@
                         </div>
                         <div class="sinlge-bar shopping">
                             <a href="#" class="single-icon"><i class="ti-bag"></i>
-                                <span class="total-count"><?=isset($cart) ? : 0?></span></a>
+                                <span class="total-count">{{ $cart }}</span></a>
                             <!-- Shopping Item -->
                             <div class="shopping-item">
                                 <div class="dropdown-cart-header">

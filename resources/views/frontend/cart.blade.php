@@ -94,7 +94,7 @@
                                     <li class="last">You Pay<span>${{$total}}.00</span></li>
                                 </ul>
                                 <div class="button5">
-                                    <a href="#" class="btn checkout_btn">Buy Now</a>
+                                    <a href="{{ url('/checkout')}}" class="btn checkout_btn">Buy Now</a>
                                     <a href="{{ url('/') }}" class="btn">Continue shopping</a>
                                 </div>
                             </div>

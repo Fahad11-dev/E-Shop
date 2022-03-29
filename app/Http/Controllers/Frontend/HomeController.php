@@ -18,17 +18,10 @@ class HomeController extends Controller
             $cart = Cart::where('user_id',Auth::user()->id)->count();
             $product = Product::all();
             $category = Category::all();
-            return view('frontend.home',compact('product','category','cart'));
+            return view('layout.header',compact('product','category','cart'));
         }
             $product = Product::all();
             $category = Category::all();
-            return view('frontend.home',compact('product','category'));
-    }
-
-
-    public function returnCategory()
-    {
-        $category = Category::all();
-        return view('layout.header',compact('category'));
+            return view('layout.header',compact('product','category'));
     }
 }
