@@ -131,8 +131,9 @@
                         <div class="search-bar">
 
                             <select>
-                                @foreach ($category as $item)
+                                
                                 <option selected="selected">All Category</option>
+                                @foreach ($category as $item)
                                 <option>{{ $item->name }}</option>
                                 @endforeach
                             </select>
@@ -155,7 +156,7 @@
                         </div>
                         <div class="sinlge-bar shopping">
                             <a href="#" class="single-icon"><i class="ti-bag"></i>
-                                <span class="total-count">{{ $cart }}</span></a>
+                                <span class="total-count">{{ $cart ? $cart : 0 }}</span></a>
                             <!-- Shopping Item -->
                             <div class="shopping-item">
                                 <div class="dropdown-cart-header">

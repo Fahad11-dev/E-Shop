@@ -35,7 +35,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($cart as $item)
+                        @foreach ($items as $item)
                     <tr>
                         <input type="hidden" id="cart_id" name="id" value="{{ $item->c_id }}">
                         <td class="image" data-title="No"><img src="{{('admin_assets/uploads/product/'.$item->product_image)}}" alt="#"></td>

@@ -15,13 +15,14 @@ class HomeController extends Controller
     public function returnHome()
     {
         if(Auth::check()){
-            $cart = Cart::where('user_id',Auth::user()->id)->count();
+            $user_id = Auth::user()->id;
+            $cart = Cart::where(['user_id',$user_id,'status'=>'incomplete'])->count();
             $product = Product::all();
             $category = Category::all();
-            return view('layout.header',compact('product','category','cart'));
+            return view('frontend.home',compact('product','category','cart'));
         }
             $product = Product::all();
             $category = Category::all();
-            return view('layout.header',compact('product','category'));
+            return view('frontend.home',compact('product','category'));
     }
 }

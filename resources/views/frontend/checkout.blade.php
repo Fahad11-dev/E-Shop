@@ -28,30 +28,26 @@
                     <h2>Make Your Checkout Here</h2>
                     <p>Please register in order to checkout more quickly</p>
                     <!-- Form -->
-                    <form class="form" method="post" action="#">
+                    @if (Session::has('message'))
+                        <div class="alert alert-danger col-lg-8" role="alert">
+                                {{ Session::get('message') }}
+                        </div>
+                    @endif
+                    <form class="form" method="post" action="{{ url('getOrder')}}">
+                        @csrf
+                        <input type="hidden" name="total_price" value="{{ $total }}">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>First Name<span>*</span></label>
-                                    <input type="text" name="name" placeholder="" required="required">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label>Last Name<span>*</span></label>
-                                    <input type="text" name="name" placeholder="" required="required">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label>Email Address<span>*</span></label>
-                                    <input type="email" name="email" placeholder="" required="required">
+                                    <label>Full Name<span>*</span></label>
+                                    <input type="text" id="full_name" name="name" placeholder="" required="required">
+                                    <span class="text-danger text-bold" style="display: none" id="name_alert">Full Name is Required*</span>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Phone Number<span>*</span></label>
-                                    <input type="number" name="number" placeholder="" required="required">
+                                    <input type="number"  id="phone" name="number" placeholder="" required="required">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
@@ -309,7 +305,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>State / Divition<span>*</span></label>
-                                    <select name="state-province" id="state-province">
+                                    <select name="state_province" id="state_province">
                                         <option value="divition" selected="selected">New Yourk</option>
                                         <option>Los Angeles</option>
                                         <option>Chicago</option>
@@ -323,44 +319,35 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Address Line 1<span>*</span></label>
-                                    <input type="text" name="address" placeholder="" required="required">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label>Address Line 2<span>*</span></label>
-                                    <input type="text" name="address" placeholder="" required="required">
+                                    <input type="text" id="address" name="address" placeholder="" required="required">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Postal Code<span>*</span></label>
-                                    <input type="text" name="post" placeholder="" required="required">
+                                    <input type="text" id="post" name="post" placeholder="" required="required">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Card Number<span>*</span></label>
+                                    <input type="text" id="card_number" name="card_number" placeholder="" required="required">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>Company<span>*</span></label>
-                                    <select name="company_name" id="company">
-                                        <option value="company" selected="selected">Microsoft</option>
-                                        <option>Apple</option>
-                                        <option>Xaiomi</option>
-                                        <option>Huawer</option>
-                                        <option>Wpthemesgrid</option>
-                                        <option>Samsung</option>
-                                        <option>Motorola</option>
-                                    </select>
+                                    <label>Expiry Date<span>*</span></label>
+                                    <input type="date" id="card_expiry" name="card_expiry" placeholder="" required="required">
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group create-account">
-                                    <input id="cbox" type="checkbox">
-                                    <label>Create an account?</label>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Security Number<span>*</span></label>
+                                    <input type="text" id="security_number" name="security_number" placeholder="" required="required">
                                 </div>
                             </div>
                         </div>
-                    </form>
-                    <!--/ End Form -->
+                    
                 </div>
             </div>
             <div class="col-lg-4 col-12">
@@ -376,18 +363,6 @@
                         </div>
                     </div>
                     <!--/ End Order Widget -->
-                    <!-- Order Widget -->
-                    <div class="single-widget">
-                        <h2>Payments</h2>
-                        <div class="content">
-                            <div class="checkbox">
-                                <label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label>
-                                <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"> Cash On Delivery</label>
-                                <label class="checkbox-inline" for="3"><input name="news" id="3" type="checkbox"> PayPal</label>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/ End Order Widget -->
                     <!-- Payment Method Widget -->
                     <div class="single-widget payement">
                         <div class="content">
@@ -399,8 +374,10 @@
                     <div class="single-widget get-button">
                         <div class="content">
                             <div class="button">
-                                <a href="#" class="btn">proceed to checkout</a>
+                                <button type="submit" id="checkOutDetails" class="btn">Place order</button>
                             </div>
+                        </form>
+                        <!--/ End Form -->
                         </div>
                     </div>
                     <!--/ End Button Widget -->
