@@ -41,7 +41,8 @@ class UsersController extends Controller
         $user = new User([
             'name'=>$data['name'],
             'email'=>$data['email'],
-            'password'=>bcrypt($data['password'])
+            'password'=>bcrypt($data['password']),
+            'is_active'=>'active'
         ]);
         if($user->save()){
             return redirect('/login')->with('message','Please Login to Continue');

@@ -16,8 +16,8 @@ class CheckoutController extends Controller
     {
         $user_id = Auth::user()->id;
         $category = Category::all();
-        $cart = Cart::where(['user_id',$user_id,'status'=>'incomplete'])->count();
-        $total = Cart::where(['user_id'=>$user_id])->sum('total_price');
+        $cart = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->count();
+        $total = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->sum('total_price');
         return view('frontend.checkout',compact('total','category','cart'));
     }
 
@@ -51,7 +51,7 @@ class CheckoutController extends Controller
         $checkout->country_name = $request->country_name;
         $checkout->state_province = $request->state_province;
         $checkout->address = $request->address;
-        $checkout->post = $request->post;
+        $checkout->postal_code = $request->post;
         $checkout->card_number = $request->card_number;
         $checkout->card_expiry = $request->card_expiry;
         $checkout->security_number = $request->security_number;
@@ -59,7 +59,7 @@ class CheckoutController extends Controller
         $checkout->status = 'pending';
         $checkout->save();
         $updateCart = Cart::where('user_id',$user_id)->update(['status'=>'complete']);
-        return redirect('/checkout')->with('message','Order Placed');
+        return redirect('/checkout')->with('success','Order Placed');
        
         
         

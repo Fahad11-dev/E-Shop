@@ -29,7 +29,7 @@
                         <i class="fab fa-product-hunt"></i>Product</a>
                 </li>
                 <li>
-                    <a href="map.html">
+                    <a href="{{ url('/Orders')}}">
                         <i class="fas fa-cart-plus"></i>Orders</a>
                 </li>
             </ul>

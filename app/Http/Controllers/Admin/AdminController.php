@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Checkout;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Validated;
@@ -151,5 +152,27 @@ class AdminController extends Controller
         $category->save();
         return redirect('/categories');
     }
+
+
+
+
+    public function returnOrders()
+    {
+        $getdetails = User::select('*')->join('checkouts','users.id','checkouts.user_id')->select('*','checkouts.id as c_id')->get();
+        return view('Admin.layout.orders',compact('getdetails'));
+    }
+
+    public function OrderAprrove($id)
+    {
+        $aprroveOrder = Checkout::where('id',$id)->update(['status'=>'approve']);
+        return redirect('/Orders')->with('message','Admin has Approve this order');
+    }
+
+    public function orderCancel($id)
+    {
+        $aprroveOrder = Checkout::where('id',$id)->update(['status'=>'cancel']);
+        return redirect('/Orders')->with('message','Admin has Cancel this order');   
+    }
+
 
 }

@@ -67,6 +67,9 @@ Route::get('EditProduct/{id}/{category_id}',[AdminController::class,'editProduct
 Route::get('editCategory/{id}',[AdminController::class,'CategoryEdit']);
 Route::post('/updateProduct',[AdminController::class,'productUpdate']);
 Route::post('/updateCategory',[AdminController::class,'CategoryUpdate']);
+Route::get('/Orders',[AdminController::class,'returnOrders']);
+Route::get('approveOrder/{id}',[AdminController::class,'OrderAprrove']);
+Route::get('cancelOrder/{id}',[AdminController::class,'orderCancel']);
 
 
 });

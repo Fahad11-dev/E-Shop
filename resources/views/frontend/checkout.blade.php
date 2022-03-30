@@ -33,6 +33,11 @@
                                 {{ Session::get('message') }}
                         </div>
                     @endif
+                    @if (Session::has('success'))
+                        <div class="alert alert-success col-lg-8" role="alert">
+                                {{ Session::get('success') }}
+                        </div>
+                    @endif
                     <form class="form" method="post" action="{{ url('getOrder')}}">
                         @csrf
                         <input type="hidden" name="total_price" value="{{ $total }}">
@@ -40,7 +45,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Full Name<span>*</span></label>
-                                    <input type="text" id="full_name" name="name" placeholder="" required="required">
+                                    <input type="text" id="full_name" name="full_name" placeholder="" required="required">
                                     <span class="text-danger text-bold" style="display: none" id="name_alert">Full Name is Required*</span>
                                 </div>
                             </div>
@@ -343,7 +348,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Security Number<span>*</span></label>
-                                    <input type="text" id="security_number" name="security_number" placeholder="" required="required">
+                                    <input type="password" id="security_number" name="security_number" placeholder="" required="required">
                                 </div>
                             </div>
                         </div>

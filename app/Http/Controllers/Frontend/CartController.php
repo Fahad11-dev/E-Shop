@@ -16,11 +16,11 @@ class CartController extends Controller
     {
 
         $user_id = Auth::user()->id;
-        $total = Cart::where(['user_id'=>$user_id])->sum('total_price');
+        $total = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->sum('total_price');
         $items = Cart::where('user_id',$user_id)->select("id")
         ->leftjoin('products','carts.product_id','=','products.id')->select('*','carts.id as c_id')->get();
         $category = Category::all();
-        $cart = Cart::where(['user_id',$user_id,'status'=>'incomplete'])->count();
+        $cart = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->count();
         return view('frontend.cart',compact('items','cart','total','category'));
     }
 
@@ -39,8 +39,6 @@ class CartController extends Controller
                 'product_quantity'=>1,
                 'total_price'=>$product->product_price,
             ]);
-            // $category = Category::all();
-            // return view('frontend.cart',compact('category'));
         }else{
            return  redirect('/login')->with('message','You Have to Login');
         }
@@ -51,7 +49,6 @@ class CartController extends Controller
 
     public function cartUpdate(Request $request)
     {
-        // /dd($request->all());
         $user_id = Auth::user()->id;
         $cart = Cart::where('id',$request->id)
         ->update(['product_quantity'=>$request->quantity,'total_price'=>$request->total]);
