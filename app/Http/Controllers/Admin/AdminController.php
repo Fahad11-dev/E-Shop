@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Cart;
 use App\Models\Checkout;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -159,7 +160,11 @@ class AdminController extends Controller
     public function returnOrders()
     {
         $getdetails = User::select('*')->join('checkouts','users.id','checkouts.user_id')->select('*','checkouts.id as c_id')->get();
-        return view('Admin.layout.orders',compact('getdetails'));
+        foreach($getdetails as $user_id){
+            $getorderDetails = Cart::where('user_id',$user_id->user_id)->get();
+        }
+        
+        return view('Admin.layout.orders',compact('getdetails','getorderDetails'));
     }
 
     public function OrderAprrove($id)

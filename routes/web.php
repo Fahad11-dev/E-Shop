@@ -71,7 +71,6 @@ Route::get('/Orders',[AdminController::class,'returnOrders']);
 Route::get('approveOrder/{id}',[AdminController::class,'OrderAprrove']);
 Route::get('cancelOrder/{id}',[AdminController::class,'orderCancel']);
 
-
 });
 
 

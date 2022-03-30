@@ -80,4 +80,9 @@ $(document).ready(function(){
                     });
     });
 
+
+    $("#detail").click(function(){
+        $("#myModal").modal('show');
+    });
+
 });
