@@ -19,10 +19,13 @@ class HomeController extends Controller
             $cart = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->count();
             $product = Product::all();
             $category = Category::all();
-            return view('frontend.home',compact('product','category','cart'));
+            $items = Cart::where('user_id',$user_id)->select("id")
+            ->leftjoin('products','carts.product_id','=','products.id')->select('*','carts.id as c_id')->get();
+            return view('frontend.home',compact('product','category','cart','item'));
         }
             $product = Product::all();
             $category = Category::all();
             return view('frontend.home',compact('product','category'));
     }
+
 }

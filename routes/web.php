@@ -20,7 +20,6 @@ use App\Http\Controllers\Admin\AdminLoginController;
 */
 
 Route::get('/',[HomeController::class,'returnHome']);
-Route::get('/header-Hidden',[HomeController::class,'returnCategory']);
 Route::get('/login',[UsersController::class,'returnLogin']);
 Route::get('/register',[UsersController::class,'returnRegister']);
 Route::get('/contact',[ContactController::class,'returnContact']);

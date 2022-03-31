@@ -164,29 +164,31 @@
                             <!-- Shopping Item -->
                             <div class="shopping-item">
                                 <div class="dropdown-cart-header">
-                                    <span>2 Items</span>
+                                    @if (isset(Auth::user()->name))
+                                    <span>{{ $cart }} Items</span>
+                                    @else
+                                    <span>0 Items</span>
+                                    @endif
                                     <a href="#">View Cart</a>
                                 </div>
                                 <ul class="shopping-list">
+                                    @if (isset(Auth::user()->name))
+                                    @foreach ($items as $collection)
                                     <li>
-                                        <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                        <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
-                                        <h4><a href="#">Woman Ring</a></h4>
-                                        <p class="quantity">1x - <span class="amount">$99.00</span></p>
-                                    </li>
+                                        <a href="{{ url('delete/'. $item->c_id )}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+                                        <a class="cart-img" href="#"><img src="{{('admin_assets/uploads/product/'.$collection->product_image)}}" alt="#"></a>
+                                        <h4><a href="#">{{ $collection->product_title }}</a></h4>
+                                        <p class="quantity">1x - <span class="amount">${{ $item->product_price}}.00</span></p>
+                                     </li> 
+                                    @endforeach
+                                    @else
                                     <li>
-                                        <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                        <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
-                                        <h4><a href="#">Woman Necklace</a></h4>
-                                        <p class="quantity">1x - <span class="amount">$35.00</span></p>
+                                        <span>Empty</span> 
                                     </li>
+                                    @endif
                                 </ul>
                                 <div class="bottom">
-                                    <div class="total">
-                                        <span>Total</span>
-                                        <span class="total-amount">$134.00</span>
-                                    </div>
-                                    <a href="checkout.html" class="btn animate">Checkout</a>
+                                    <a href="{{ url('/checkout')}}" class="btn animate">Checkout</a>
                                 </div>
                             </div>
                             <!--/ End Shopping Item -->
@@ -217,10 +219,10 @@
                                             <li><a href="#">Pages</a></li>
                                             <li><a href="#">Blog<i class="ti-angle-down"></i></a>
                                                 <ul class="dropdown">
-                                                    <li><a href="blog-single-sidebar.html">Blog Single Sidebar</a></li>
+                                                    <li><a href="#">Blog Single Sidebar</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="{{ asset ('/contact')}}">Contact Us</a></li>
+                                            <li><a href="#">Contact Us</a></li>
                                         </ul>
                                     </div>
                                 </div>
