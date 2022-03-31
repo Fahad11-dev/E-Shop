@@ -60,8 +60,11 @@
                             </div>
                             <!--/ End Input Order -->
                         </td>
-                        <td class="total-amount" data-title="Total"><span class="total{{$item->c_id}}" data-total="{{ $item->total_price }}">${{ $item->total_price }}.00</span></td>
-                        <td class="action" data-title="Remove"><a href="#"><i class="ti-trash remove-icon"></i></a></td>
+                        @php
+                            $subtotal = $item->total_price * $item->product_quantity;
+                        @endphp
+                        <td class="total-amount" data-title="Total"><span class="total{{$item->c_id}}" data-total="{{ $item->total_price }}">${{ $subtotal }}.00</span></td>
+                        <td class="action" data-title="Remove"><a href="{{ url('delete/'. $item->c_id )}}"><i class="ti-trash remove-icon"></i></a></td>
                     </tr>
                     @endforeach
                     </tbody>
@@ -90,8 +93,8 @@
                         <div class="col-lg-4 col-md-7 col-12">
                             <div class="right">
                                 <ul>
-                                    <li>Cart Subtotal<span>${{$total}}.00</span></li>
-                                    <li class="last">You Pay<span>${{$total}}.00</span></li>
+                                    <li>Cart Subtotal<span class="subtotal">${{$total}}.00</span></li>
+                                    <li class="last">You Pay<span class="subtotal">${{$total}}.00</span></li>
                                 </ul>
                                 <div class="button5">
                                     <a href="{{ url('/checkout')}}" class="btn checkout_btn">Buy Now</a>

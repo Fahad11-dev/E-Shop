@@ -40,8 +40,10 @@ Route::group(['middleware'=>'userauth'],function(){
     Route::get('/cart',[CartController::class,'returnCart']);
     Route::POST('AddCart',[CartController::class,'Cartadd']);
     Route::POST('updateCart',[CartController::class,'cartUpdate']);
+    Route::get('delete/{id}',[CartController::class,'deleteItem']);
     Route::get('/checkout',[CheckoutController::class,'returnCheckout']);
     Route::POST('getOrder',[CheckoutController::class,'CheckOut']);
+
 });
 
 

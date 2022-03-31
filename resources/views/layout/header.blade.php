@@ -157,9 +157,10 @@
                         <div class="sinlge-bar shopping">
                             <a href="#" class="single-icon"><i class="ti-bag"></i>
                                 @if (isset(Auth::user()->name))
-                                <span class="total-count">{{ $cart ? $cart : 0 }}</span></a>
-                                @endif
+                                <span class="total-count">{{ $cart }}</span></a>
+                                @else
                                 <span class="total-count">0</span></a>
+                                @endif
                             <!-- Shopping Item -->
                             <div class="shopping-item">
                                 <div class="dropdown-cart-header">

@@ -44,6 +44,10 @@ class CheckoutController extends Controller
         }else if(!isset($data['security_number'])){
             return redirect('/checkout')->with('message','Security Number is required');
         }
+        $nameCheck = Checkout::where(['phone'=>$data['number']])->exists();
+        if($nameCheck){
+            return redirect('/checkout')->with('message','Number Already Exist');
+        }
         $checkout = new Checkout;
         $checkout->user_id = $user_id;
         $checkout->full_name = $request->full_name;

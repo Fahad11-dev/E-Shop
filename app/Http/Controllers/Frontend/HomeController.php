@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         if(Auth::check()){
             $user_id = Auth::user()->id;
-            $cart = Cart::where(['user_id',$user_id,'status'=>'incomplete'])->count();
+            $cart = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->count();
             $product = Product::all();
             $category = Category::all();
             return view('frontend.home',compact('product','category','cart'));

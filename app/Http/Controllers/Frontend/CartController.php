@@ -30,7 +30,16 @@ class CartController extends Controller
         $id = $request->id;
         if(Auth::check())
         {
-            $product = Product::findOrFail($id);
+            $product = Product::find($id);
+            
+            $data = Cart::where('product_id',$id)->first();
+            if($data != ""){
+            $increase = $data['product_quantity']+1;
+            $updateqty = Cart::where('product_id',$id)->update(['product_quantity'=>$increase]);
+            $updateqty = Cart::where('product_id',$id)->sum('total_price');
+            return response()->json(['subtotal'=>$updateqty]);
+            } 
+            
             $cart = Cart::insert([
                 'user_id'=>auth()->user()->id,
                 'product_id'=>$id,
@@ -52,6 +61,17 @@ class CartController extends Controller
         $user_id = Auth::user()->id;
         $cart = Cart::where('id',$request->id)
         ->update(['product_quantity'=>$request->quantity,'total_price'=>$request->total]);
-        return response()->json(['result'=>$request->total]);
+        $subtotal = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->sum('total_price');
+        return response()->json(['result'=>$request->total,'subtotal'=>$subtotal]);
+    }
+
+
+
+
+    public function deleteItem($id)
+    {
+        $deleteItem = Cart::find($id);
+        $deleteItem->delete();
+        return redirect('/cart');
     }
 }

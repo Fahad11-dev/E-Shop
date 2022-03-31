@@ -68,7 +68,7 @@
                                     @foreach ($getorderDetails as $items)
                                     <tr>           
                                         <td>{{ $items->product_title }}</td>
-                                        <td>{{ $items->product_price }}</td>
+                                        <td>${{ $items->product_price }}.00</td>
                                         <td>{{ $items->product_quantity }}</td>
                                        
                                     </tr>

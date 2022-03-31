@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     $("#Home").hover(function (){
         $(this).css('cursor','pointer');
@@ -9,7 +10,7 @@ $(document).ready(function(){
     $(".cart").click(function(e){
         e.preventDefault();
         var id = $(this).attr('data');
-        var id;
+        var cart_id  = $("#cart_id").val();
         $.ajax({
             url : "AddCart/",
             method : "POST",
@@ -23,6 +24,7 @@ $(document).ready(function(){
             ,
             success:  function (response) {
                 window.location.replace('/cart');
+                $(".total"+cart_id).text(response.total);
             },
         });
     });
@@ -74,8 +76,10 @@ $(document).ready(function(){
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success:  function (response) {
-                    $(".total"+id).text('$'+response.result);
-                    console.log(response.result);
+                    $(".total"+id).text('$'+response.result+ '.00');
+                    $(".subtotal").text('$'+response.subtotal+'.00');
+                   
+                    console.log(response.result + response.result);
                     },
                     });
     });
