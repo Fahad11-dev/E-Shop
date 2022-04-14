@@ -18,7 +18,9 @@ class CheckoutController extends Controller
         $category = Category::all();
         $cart = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->count();
         $total = Cart::where(['user_id'=>$user_id,'status'=>'incomplete'])->sum('total_price');
-        return view('frontend.checkout',compact('total','category','cart'));
+        $items = Cart::where('user_id',$user_id)->select("id")
+            ->leftjoin('products','carts.product_id','=','products.id')->select('*','carts.id as c_id')->get();
+        return view('frontend.checkout',compact('total','category','cart','items'));
     }
 
     public function CheckOut(Request $request)

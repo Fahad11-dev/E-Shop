@@ -175,10 +175,10 @@
                                     @if (isset(Auth::user()->name))
                                     @foreach ($items as $collection)
                                     <li>
-                                        <a href="{{ url('delete/'. $item->c_id )}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+                                        <a href="{{ url('delete/'. $collection->c_id )}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
                                         <a class="cart-img" href="#"><img src="{{('admin_assets/uploads/product/'.$collection->product_image)}}" alt="#"></a>
                                         <h4><a href="#">{{ $collection->product_title }}</a></h4>
-                                        <p class="quantity">1x - <span class="amount">${{ $item->product_price}}.00</span></p>
+                                        <p class="quantity">1x - <span class="amount">${{ $collection->product_price}}.00</span></p>
                                      </li> 
                                     @endforeach
                                     @else

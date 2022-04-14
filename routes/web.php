@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\AdminLoginController;
 |
 */
 
-Route::get('/',[HomeController::class,'returnHome']);
+Route::get('/home',[HomeController::class,'returnHome']);
 Route::get('/login',[UsersController::class,'returnLogin']);
 Route::get('/register',[UsersController::class,'returnRegister']);
 Route::get('/contact',[ContactController::class,'returnContact']);
@@ -49,10 +49,11 @@ Route::group(['middleware'=>'userauth'],function(){
 
 #Admin Section Start Here
 
-Route::get('/E-Shop-Admin',function(){
+Route::get('/',function(){
     return view('Admin.layout.admin_login');
 });
 Route::post('/adminLogin',[AdminLoginController::class,'AdminAuth']);
+
 Route::group(['middleware'=>'isadmin'],function () {
 Route::get('/AdminLogout',[AdminLoginController::class,'logoutAdmin']);
 Route::get('/dashboard',[AdminController::class,'returnAdmin']);
@@ -68,7 +69,8 @@ Route::get('EditProduct/{id}/{category_id}',[AdminController::class,'editProduct
 Route::get('editCategory/{id}',[AdminController::class,'CategoryEdit']);
 Route::post('/updateProduct',[AdminController::class,'productUpdate']);
 Route::post('/updateCategory',[AdminController::class,'CategoryUpdate']);
-Route::get('/Orders',[AdminController::class,'returnOrders']);
+Route::get('/inventory',[AdminController::class,'returnInventory']);
+Route::get('/sales',[AdminController::class,'sales']);
 Route::get('approveOrder/{id}',[AdminController::class,'OrderAprrove']);
 Route::get('cancelOrder/{id}',[AdminController::class,'orderCancel']);
 

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Cart;
 use App\Models\Checkout;
+use DB;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Validated;
@@ -157,14 +158,14 @@ class AdminController extends Controller
 
 
 
-    public function returnOrders()
+    public function returnInventory()
     {
-        $getdetails = User::select('*')->join('checkouts','users.id','checkouts.user_id')->select('*','checkouts.id as c_id')->get();
-        foreach($getdetails as $user_id){
-            $getorderDetails = Cart::where('user_id',$user_id->user_id)->get();
-        }
-        
-        return view('Admin.layout.orders',compact('getdetails','getorderDetails'));
+        // $getdetails = User::select('*')->join('checkouts','users.id','checkouts.user_id')->select('*','checkouts.id as c_id')->get();
+        $products = DB::table('products')
+        ->join('categories', 'products.category_id', '=' ,'categories.id')
+        ->select('products.id','products.product_title','products.product_price','products.product_image','products.product_price','products.stock'
+        ,'products.created_at','categories.name')->get()->toArray();
+        return view('Admin.layout.inventory',compact('products'));
     }
 
     public function OrderAprrove($id)
@@ -177,6 +178,16 @@ class AdminController extends Controller
     {
         $aprroveOrder = Checkout::where('id',$id)->update(['status'=>'cancel']);
         return redirect('/Orders')->with('message','Admin has Cancel this order');   
+    }
+
+
+    public function sales()
+    {
+        $products = DB::table('products')
+        ->join('categories', 'products.category_id', '=' ,'categories.id')
+        ->select('products.id','products.product_title','products.product_price','products.product_image','products.product_price','products.stock'
+        ,'products.created_at','categories.name')->get()->toArray();
+        return view('Admin.layout.sales',compact('products'));
     }
 
 

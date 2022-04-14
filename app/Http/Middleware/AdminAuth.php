@@ -16,10 +16,12 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()){   
-        if(Auth::user()->role_as == 'admin'){
-        return $next($request);
-        }
+        if(Auth::check()){
+            if(Auth::user()->role_as == 'admin'){
+            return $next($request);
+            }else{
+                return redirect('/login')->with('message','You Dont Have Permission to access this Page'); 
+            }
         }else{
             return redirect('/login')->with('message','You Dont Have Permission to access this Page');
         }

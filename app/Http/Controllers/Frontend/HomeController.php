@@ -21,7 +21,7 @@ class HomeController extends Controller
             $category = Category::all();
             $items = Cart::where('user_id',$user_id)->select("id")
             ->leftjoin('products','carts.product_id','=','products.id')->select('*','carts.id as c_id')->get();
-            return view('frontend.home',compact('product','category','cart','item'));
+            return view('frontend.home',compact('product','category','cart','items'));
         }
             $product = Product::all();
             $category = Category::all();

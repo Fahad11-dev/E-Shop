@@ -29,8 +29,12 @@
                         <i class="fab fa-product-hunt"></i>Product</a>
                 </li>
                 <li>
-                    <a href="{{ url('/Orders')}}">
-                        <i class="fas fa-cart-plus"></i>Orders</a>
+                    <a href="{{ url('/inventory')}}">
+                        <i class="fas fa-cart-plus"></i>Inventory</a>
+                </li>
+                <li>
+                    <a href="{{ url('/sales')}}">
+                        <i class="fas fa-cart-plus"></i>Sales</a>
                 </li>
             </ul>
         </nav>
