@@ -17,7 +17,9 @@ class AdminLoginController extends Controller
                 return redirect('/E-Shop-Admin')->with('message','Password is Required');
             }
         else{
+
             $credentials = request(['email','password']);
+//            dd($credentials);
             if(Auth::attempt($credentials)){
                 return redirect('/dashboard');
             }else{

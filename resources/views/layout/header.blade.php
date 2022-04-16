@@ -156,11 +156,15 @@
                         </div>
                         <div class="sinlge-bar shopping">
                             <a href="#" class="single-icon"><i class="ti-bag"></i>
+<<<<<<< Updated upstream
                                 @if (isset(Auth::user()->name))
                                 <span class="total-count">{{ $cart }}</span></a>
                                 @else
                                 <span class="total-count">0</span></a>
                                 @endif
+=======
+                                <span class="total-count"><?php isset($cart) ? ($cart) : 0?></span></a>
+>>>>>>> Stashed changes
                             <!-- Shopping Item -->
                             <div class="shopping-item">
                                 <div class="dropdown-cart-header">
